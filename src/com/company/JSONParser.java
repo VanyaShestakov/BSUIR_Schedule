@@ -1,5 +1,10 @@
 package com.company;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 public class JSONParser {
     private static final String SCHEDULES = "schedules";
     private static final String WEEKDAY = "weekDay";
@@ -24,5 +29,57 @@ public class JSONParser {
 
     public JSONParser() {
 
+    }
+
+    public ArrayList<ArrayList<Lesson>> parseToList(JSONObject jsonObject) {
+        ArrayList<ArrayList<Lesson>> weekDays = new ArrayList<>();
+        for (int currDay = 0; currDay < jsonObject.getJSONArray(SCHEDULES).length(); currDay++) {
+            int pairsAmount = jsonObject.getJSONArray(SCHEDULES).
+                    getJSONObject(currDay).
+                    getJSONArray(SCHEDULE).length();
+
+            ArrayList<Lesson> currPairs = new ArrayList<>();
+            for (int currPair = 0; currPair < pairsAmount; currPair++) {
+                String subjectName = jsonObject.
+                        getJSONArray(SCHEDULES).
+                        getJSONObject(currDay).
+                        getJSONArray(SCHEDULE).
+                        getJSONObject(currPair).
+                        getString(SUBJECT);
+                String time = jsonObject.
+                        getJSONArray(SCHEDULES).
+                        getJSONObject(currDay).
+                        getJSONArray(SCHEDULE).
+                        getJSONObject(currPair).
+                        getString(LESSON_TIME);
+                String teacher;
+                try {
+                    teacher = jsonObject.
+                            getJSONArray(SCHEDULES).
+                            getJSONObject(currDay).
+                            getJSONArray(SCHEDULE).
+                            getJSONObject(currPair).
+                            getJSONArray("employee").
+                            getJSONObject(0).
+                            getString("fio");
+                } catch (JSONException e) {
+                    teacher = "-";
+                }
+                String type = jsonObject.
+                        getJSONArray(SCHEDULES).
+                        getJSONObject(currDay).
+                        getJSONArray(SCHEDULE).
+                        getJSONObject(currPair).
+                        getString("lessonType");
+                String weekDay = jsonObject.
+                        getJSONArray(SCHEDULES).
+                        getJSONObject(currDay).
+                        getString(WEEKDAY);
+                Lesson currLesson = new Lesson(subjectName, time, teacher, type, weekDay);
+                currPairs.add(currLesson);
+            }
+            weekDays.add(currPairs);
+        }
+        return weekDays;
     }
 }

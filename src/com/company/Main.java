@@ -36,72 +36,9 @@ public class Main {
 
 
     public static void main(String[] args) {
-        String jsonData = getJsonData("051007");
-        JSONObject jsonObject = new JSONObject(jsonData);
-        StringBuilder schedule = new StringBuilder();
-      for (int currDay = 0; currDay < jsonObject.getJSONArray(SCHEDULES).length(); currDay++) {
-
-          schedule.append("-----------------------\n").
-                  append(jsonObject.getJSONArray(SCHEDULES).
-                          getJSONObject(currDay).
-                          getString(WEEKDAY)).append("\n-----------------------\n");
-
-          for (int currPair = 0; currPair < jsonObject.getJSONArray(SCHEDULES).getJSONObject(currDay).getJSONArray(SCHEDULE).length(); currPair++) {
-              schedule.append(jsonObject.getJSONArray(SCHEDULES).
-                      getJSONObject(currDay).
-                      getJSONArray(SCHEDULE).
-                      getJSONObject(currPair).
-                      getString(SUBJECT)).append(" (").
-                      append(jsonObject.getJSONArray(SCHEDULES).
-                              getJSONObject(currDay).
-                              getJSONArray(SCHEDULE).
-                              getJSONObject(currPair).
-                              getString("lessonType")).append(") ").
-                      append(jsonObject.getJSONArray(SCHEDULES).
-                              getJSONObject(currDay).
-                              getJSONArray(SCHEDULE).
-                              getJSONObject(currPair).
-                              getString(LESSON_TIME)).append("\n");
-
-              try {
-                  schedule.append(jsonObject.getJSONArray(SCHEDULES).
-                          getJSONObject(currDay).
-                          getJSONArray(SCHEDULE).
-                          getJSONObject(currPair).
-                          getJSONArray("employee").getJSONObject(0).getString("fio")).append("\n");
-              } catch (JSONException e) {
-                  schedule.append("--\n");
-              }
-              schedule.append("\n");
-          }
-      }
-
+        BSUIRSchedule schedule = new BSUIRSchedule();
         System.out.println(schedule);
-
     }
 
-    static String getJsonData(String groupNumber) {
-        try {
-            URL url = new URL("https://journal.bsuir.by/api/v1/studentGroup/schedule?studentGroup=" + groupNumber);
-            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("Content-Type", "application/json");
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                String line;
-                StringBuilder jsonData = new StringBuilder();
 
-                while ((line = reader.readLine()) != null) {
-                    jsonData.append(line);
-                }
-
-                return jsonData.toString();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
 }
