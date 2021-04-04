@@ -1,15 +1,13 @@
 package com.company;
 
-import org.json.HTTP;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 
 public class Main {
 
@@ -40,29 +38,45 @@ public class Main {
     public static void main(String[] args) {
         String jsonData = getJsonData("051007");
         JSONObject jsonObject = new JSONObject(jsonData);
-        StringBuilder mondaySchedule = new StringBuilder();
-        mondaySchedule.append(jsonObject.getString("todayDate")).append("\n").
-        append(jsonObject.getJSONArray(SCHEDULES).
-            getJSONObject(0).
-            getString(WEEKDAY)).append("\n").
-        append(jsonObject.getJSONArray(SCHEDULES).
-            getJSONObject(0).
-            getJSONArray(SCHEDULE).
-            getJSONObject(FIRST_PAIR).
-            getString(SUBJECT)).append("\n").
-        append(jsonObject.getJSONArray(SCHEDULES).
-            getJSONObject(0).
-            getJSONArray(SCHEDULE).
-            getJSONObject(FIRST_PAIR).
-            getString(LESSON_TIME)).append("\n").
-        append(jsonObject.getJSONArray(SCHEDULES).
-            getJSONObject(0).
-            getJSONArray(SCHEDULE).
-            getJSONObject(FIRST_PAIR).
-            getJSONArray("employee").getJSONObject(0).getString("lastName")).append("\n");
+        StringBuilder schedule = new StringBuilder();
+      for (int currDay = 0; currDay < jsonObject.getJSONArray(SCHEDULES).length(); currDay++) {
 
+          schedule.append("-----------------------\n").
+                  append(jsonObject.getJSONArray(SCHEDULES).
+                          getJSONObject(currDay).
+                          getString(WEEKDAY)).append("\n-----------------------\n");
 
-        System.out.println(mondaySchedule);
+          for (int currPair = 0; currPair < jsonObject.getJSONArray(SCHEDULES).getJSONObject(currDay).getJSONArray(SCHEDULE).length(); currPair++) {
+              schedule.append(jsonObject.getJSONArray(SCHEDULES).
+                      getJSONObject(currDay).
+                      getJSONArray(SCHEDULE).
+                      getJSONObject(currPair).
+                      getString(SUBJECT)).append(" (").
+                      append(jsonObject.getJSONArray(SCHEDULES).
+                              getJSONObject(currDay).
+                              getJSONArray(SCHEDULE).
+                              getJSONObject(currPair).
+                              getString("lessonType")).append(") ").
+                      append(jsonObject.getJSONArray(SCHEDULES).
+                              getJSONObject(currDay).
+                              getJSONArray(SCHEDULE).
+                              getJSONObject(currPair).
+                              getString(LESSON_TIME)).append("\n");
+
+              try {
+                  schedule.append(jsonObject.getJSONArray(SCHEDULES).
+                          getJSONObject(currDay).
+                          getJSONArray(SCHEDULE).
+                          getJSONObject(currPair).
+                          getJSONArray("employee").getJSONObject(0).getString("fio")).append("\n");
+              } catch (JSONException e) {
+                  schedule.append("--\n");
+              }
+              schedule.append("\n");
+          }
+      }
+
+        System.out.println(schedule);
 
     }
 
