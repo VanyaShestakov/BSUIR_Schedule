@@ -12,8 +12,9 @@ import java.util.ArrayList;
 public class BSUIRSchedule {
     private ArrayList<ArrayList<Lesson>> scheduleList;
 
-    public BSUIRSchedule() {
-        String jsonData = getJsonData("051007");
+    public BSUIRSchedule(String groupNumber) {
+        String jsonData = getJsonData(groupNumber);
+        System.out.println(jsonData);
         JSONObject jsonObject = new JSONObject(jsonData);
         JSONParser parser = new JSONParser();
         scheduleList = parser.parseToList(jsonObject);
@@ -56,6 +57,18 @@ public class BSUIRSchedule {
             }
             sb.append("\n");
         }
+        return sb.toString();
+    }
+
+    public String getForWeekDay(int weekDay) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("------------------------\n");
+        sb.append(scheduleList.get(weekDay).get(0).getWeekDay()).append("\n");
+        sb.append("------------------------\n");
+        for (int j = 0; j < scheduleList.get(weekDay).size(); j++) {
+            sb.append(scheduleList.get(weekDay).get(j)).append("\n").append("\n");
+        }
+        sb.append("\n");
         return sb.toString();
     }
 
