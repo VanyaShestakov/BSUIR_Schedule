@@ -50,6 +50,13 @@ public class BSUIRSchedule {
     }
 
     public String getForCurrentWeek() {
+        return getForWeek(currentWeek);
+    }
+
+    public String getForWeek(int weekNumber) {
+        if (weekNumber < 1 || weekNumber > 4) {
+            throw new WeekNumberDoesNotExistsException("Week number should be in range [1; 4]");
+        }
         StringBuilder sb = new StringBuilder();
         sb.append("Week:").append(currentWeek).append("\n");
         for (int i = 0; i < scheduleList.size(); i++) {
@@ -57,7 +64,7 @@ public class BSUIRSchedule {
             sb.append(scheduleList.get(i).get(0).getWeekDay()).append("\n");
             sb.append("------------------------\n");
             for (int j = 0; j < scheduleList.get(i).size(); j++) {
-                if (scheduleList.get(i).get(j).getWeeks().contains(currentWeek)){
+                if (scheduleList.get(i).get(j).getWeeks().contains(weekNumber)){
                     sb.append(scheduleList.get(i).get(j)).append("\n").append("\n");
                 }
             }
