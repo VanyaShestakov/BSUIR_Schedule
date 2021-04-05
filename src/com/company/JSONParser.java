@@ -11,6 +11,11 @@ public class JSONParser {
     private static final String SCHEDULE = "schedule";
     private static final String SUBJECT = "subject";
     private static final String LESSON_TIME = "lessonTime";
+    private static final String EMPLOYEE = "employee";
+    private static final String FIO = "fio";
+    private static final String LESSON_TYPE = "lessonType";
+
+
 
     private static final int MONDAY = 0;
     private static final int TUESDAY = 1;
@@ -59,9 +64,9 @@ public class JSONParser {
                             getJSONObject(currDay).
                             getJSONArray(SCHEDULE).
                             getJSONObject(currPair).
-                            getJSONArray("employee").
+                            getJSONArray(EMPLOYEE).
                             getJSONObject(0).
-                            getString("fio");
+                            getString(FIO);
                 } catch (JSONException e) {
                     teacher = "-";
                 }
@@ -70,11 +75,12 @@ public class JSONParser {
                         getJSONObject(currDay).
                         getJSONArray(SCHEDULE).
                         getJSONObject(currPair).
-                        getString("lessonType");
+                        getString(LESSON_TYPE);
                 String weekDay = jsonObject.
                         getJSONArray(SCHEDULES).
                         getJSONObject(currDay).
                         getString(WEEKDAY);
+
                 Lesson currLesson = new Lesson(subjectName, time, teacher, type, weekDay);
                 currPairs.add(currLesson);
             }

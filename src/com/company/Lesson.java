@@ -5,7 +5,7 @@ public class Lesson {
     private String time;
     private String teacher;
     private String type;
-    private int week;
+    private int[] weeks;
     private String weekDay;
 
     public Lesson(String subjectName, String time, String teacher, String type, String weekDay) {
