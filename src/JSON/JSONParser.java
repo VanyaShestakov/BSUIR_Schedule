@@ -1,10 +1,13 @@
 package JSON;
 
 import Schedule.BSUIRLesson;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 
 public class JSONParser {
     private static final String SCHEDULES = "schedules";
@@ -64,8 +67,15 @@ public class JSONParser {
                         getJSONArray(SCHEDULES).
                         getJSONObject(currDay).
                         getString(WEEKDAY);
-
-                BSUIRLesson currLesson = new BSUIRLesson(subjectName, time, teacher, type, weekDay);
+                JSONArray weeksJSON = jsonObject.
+                        getJSONArray(SCHEDULES).
+                        getJSONObject(currDay).
+                        getJSONArray(SCHEDULE).getJSONObject(currPair).getJSONArray("weekNumber");
+                HashSet<Integer> weeks = new HashSet<>();
+                for (int i = 0; i < weeksJSON.length(); i++) {
+                    weeks.add((int) weeksJSON.get(i));
+                }
+                BSUIRLesson currLesson = new BSUIRLesson(subjectName, time, teacher, type, weekDay, weeks);
                 currPairs.add(currLesson);
             }
             weekDays.add(currPairs);

@@ -1,19 +1,27 @@
 package Schedule;
 
+import java.util.HashSet;
+
 public class BSUIRLesson {
     private String subjectName;
     private String time;
     private String teacher;
+
+    public HashSet<Integer> getWeeks() {
+        return weeks;
+    }
+
     private String type;
-    private int[] weeks;
+    private HashSet<Integer> weeks;
     private String weekDay;
 
-    public BSUIRLesson(String subjectName, String time, String teacher, String type, String weekDay) {
+    public BSUIRLesson(String subjectName, String time, String teacher, String type, String weekDay, HashSet<Integer> weeks) {
         this.subjectName = subjectName;
         this.time = time;
         this.teacher = teacher;
         this.type = type;
         this.weekDay = weekDay;
+        this.weeks = weeks;
     }
 
     @Override

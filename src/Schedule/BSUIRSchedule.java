@@ -49,4 +49,21 @@ public class BSUIRSchedule {
         return sb.toString();
     }
 
+    public String getForCurrentWeek() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Week:").append(currentWeek).append("\n");
+        for (int i = 0; i < scheduleList.size(); i++) {
+            sb.append("------------------------\n");
+            sb.append(scheduleList.get(i).get(0).getWeekDay()).append("\n");
+            sb.append("------------------------\n");
+            for (int j = 0; j < scheduleList.get(i).size(); j++) {
+                if (scheduleList.get(i).get(j).getWeeks().contains(currentWeek)){
+                    sb.append(scheduleList.get(i).get(j)).append("\n").append("\n");
+                }
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
 }
