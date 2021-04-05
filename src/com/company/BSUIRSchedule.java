@@ -14,7 +14,9 @@ public class BSUIRSchedule {
 
     public BSUIRSchedule(String groupNumber) {
         String jsonData = getJsonData(groupNumber);
-        System.out.println(jsonData);
+        if (jsonData.length() == 0) {
+            throw new JSONDataIsEmptyException("JSON data is empty");
+        }
         JSONObject jsonObject = new JSONObject(jsonData);
         JSONParser parser = new JSONParser();
         scheduleList = parser.parseToList(jsonObject);
