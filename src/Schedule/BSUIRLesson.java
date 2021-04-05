@@ -1,6 +1,6 @@
-package com.company;
+package Schedule;
 
-public class Lesson {
+public class BSUIRLesson {
     private String subjectName;
     private String time;
     private String teacher;
@@ -8,7 +8,7 @@ public class Lesson {
     private int[] weeks;
     private String weekDay;
 
-    public Lesson(String subjectName, String time, String teacher, String type, String weekDay) {
+    public BSUIRLesson(String subjectName, String time, String teacher, String type, String weekDay) {
         this.subjectName = subjectName;
         this.time = time;
         this.teacher = teacher;

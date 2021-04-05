@@ -1,16 +1,14 @@
-package com.company;
+package Schedule;
 
+import JSON.JSONParser;
+import JSON.JSONRequester;
+import Schedule.BSUIRLesson;
 import org.json.JSONObject;
 
-import javax.net.ssl.HttpsURLConnection;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class BSUIRSchedule {
-    private final ArrayList<ArrayList<Lesson>> scheduleList;
+    private final ArrayList<ArrayList<BSUIRLesson>> scheduleList;
     private final int currentWeek;
 
     public BSUIRSchedule(String groupNumber) {

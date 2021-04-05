@@ -1,4 +1,4 @@
-package com.company;
+package JSON;
 
 public class JSONDataIsEmptyException extends RuntimeException {
     public JSONDataIsEmptyException() {

@@ -1,4 +1,6 @@
-package com.company;
+package JSON;
+
+import JSON.JSONDataIsEmptyException;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
