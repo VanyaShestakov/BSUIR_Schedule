@@ -1,6 +1,6 @@
 package JSON;
 
-import JSON.JSONDataIsEmptyException;
+import JSON.Exceptions.JSONDataIsEmptyException;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;

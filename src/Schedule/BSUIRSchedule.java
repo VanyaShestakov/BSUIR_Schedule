@@ -1,8 +1,9 @@
 package Schedule;
 
+import Schedule.Exceptions.WeekDayDoesNotExistsException;
+import Schedule.Exceptions.WeekNumberDoesNotExistsException;
 import JSON.JSONParser;
 import JSON.JSONRequester;
-import Schedule.BSUIRLesson;
 import org.json.JSONObject;
 
 import java.util.ArrayList;

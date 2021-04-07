@@ -1,4 +1,4 @@
-package Schedule;
+package Schedule.Exceptions;
 
 public class WeekNumberDoesNotExistsException extends RuntimeException {
     public WeekNumberDoesNotExistsException() {
