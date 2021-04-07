@@ -39,6 +39,13 @@ public class BSUIRSchedule {
 
     public String getForWeekDay(int weekDay) {
         StringBuilder sb = new StringBuilder();
+        if (weekDay < 0 || weekDay > 6) {
+            throw new WeekDayDoesNotExistsException("Week day should be in range [0; 6]");
+        }
+        if (weekDay > scheduleList.size() - 1) {
+            sb.append("В этот день занятий нет");
+            return sb.toString();
+        }
         sb.append("------------------------\n");
         sb.append(scheduleList.get(weekDay).get(0).getWeekDay()).append("\n");
         sb.append("------------------------\n");
