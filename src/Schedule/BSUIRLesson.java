@@ -2,43 +2,36 @@ package Schedule;
 
 import java.util.HashSet;
 
-public class BSUIRLesson {
-    private String subjectName;
-    private String time;
-    private String teacher;
+class BSUIRLesson {
+    private final String subjectName;
+    private final String time;
+    private final String teacher;
+    private final String type;
+    private final HashSet<Integer> weeks;
+    private final String weekDay;
+    private final String auditory;
 
-    public HashSet<Integer> getWeeks() {
-        return weeks;
-    }
-
-    private String type;
-    private HashSet<Integer> weeks;
-    private String weekDay;
-
-    public BSUIRLesson(String subjectName, String time, String teacher, String type, String weekDay, HashSet<Integer> weeks) {
+    public BSUIRLesson(String subjectName, String time, String teacher, String type, String weekDay, HashSet<Integer> weeks, String auditory) {
         this.subjectName = subjectName;
         this.time = time;
         this.teacher = teacher;
         this.type = type;
         this.weekDay = weekDay;
         this.weeks = weeks;
+        this.auditory = auditory;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(subjectName).
-                append("(").
-                append(type).
-                append(")").
-                append(" ").
-                append(time).
-                append("\n").
-                append(teacher);
-        return sb.toString();
+    public HashSet<Integer> getWeeks() {
+        return weeks;
     }
 
     public String getWeekDay() {
         return weekDay;
     }
+
+    @Override
+    public String toString() {
+        return subjectName + "(" + type + ") " + time + "\n"+ "(" + auditory + ")\n" + teacher;
+    }
+
 }

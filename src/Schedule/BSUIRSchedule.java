@@ -2,13 +2,14 @@ package Schedule;
 
 import Schedule.Exceptions.WeekDayDoesNotExistsException;
 import Schedule.Exceptions.WeekNumberDoesNotExistsException;
-import JSON.JSONParser;
-import JSON.JSONRequester;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class BSUIRSchedule {
+    private static final String TITLE_SEPARATOR = "------------------------\n";
+    private static final int MIN_WEEK_NUMBER = 1;
+    private static final int MAX_WEEK_NUMBER = 1;
     private final ArrayList<ArrayList<BSUIRLesson>> scheduleList;
     private final int currentWeek;
 
@@ -27,9 +28,9 @@ public class BSUIRSchedule {
         StringBuilder sb = new StringBuilder();
         sb.append("Week:").append(currentWeek).append("\n");
         for (int i = 0; i < scheduleList.size(); i++) {
-            sb.append("------------------------\n");
+            sb.append(TITLE_SEPARATOR);
             sb.append(scheduleList.get(i).get(0).getWeekDay()).append("\n");
-            sb.append("------------------------\n");
+            sb.append(TITLE_SEPARATOR);
             for (int j = 0; j < scheduleList.get(i).size(); j++) {
                 sb.append(scheduleList.get(i).get(j)).append("\n").append("\n");
             }
@@ -47,9 +48,9 @@ public class BSUIRSchedule {
             sb.append("В этот день занятий нет");
             return sb.toString();
         }
-        sb.append("------------------------\n");
+        sb.append(TITLE_SEPARATOR);
         sb.append(scheduleList.get(weekDay).get(0).getWeekDay()).append("\n");
-        sb.append("------------------------\n");
+        sb.append(TITLE_SEPARATOR);
         for (int j = 0; j < scheduleList.get(weekDay).size(); j++) {
             sb.append(scheduleList.get(weekDay).get(j)).append("\n").append("\n");
         }
@@ -68,9 +69,9 @@ public class BSUIRSchedule {
         StringBuilder sb = new StringBuilder();
         sb.append("Week:").append(currentWeek).append("\n");
         for (int i = 0; i < scheduleList.size(); i++) {
-            sb.append("------------------------\n");
+            sb.append(TITLE_SEPARATOR);
             sb.append(scheduleList.get(i).get(0).getWeekDay()).append("\n");
-            sb.append("------------------------\n");
+            sb.append(TITLE_SEPARATOR);
             for (int j = 0; j < scheduleList.get(i).size(); j++) {
                 if (scheduleList.get(i).get(j).getWeeks().contains(weekNumber)){
                     sb.append(scheduleList.get(i).get(j)).append("\n").append("\n");

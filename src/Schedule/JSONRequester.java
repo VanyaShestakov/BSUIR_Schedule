@@ -1,6 +1,6 @@
-package JSON;
+package Schedule;
 
-import JSON.Exceptions.JSONDataIsEmptyException;
+import Schedule.JSON.Exceptions.JSONDataIsEmptyException;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-public class JSONRequester {
+class JSONRequester {
     private static final String GROUP_SCHEDULE_URL = "https://journal.bsuir.by/api/v1/studentGroup/schedule?studentGroup=";
     private static final String CURRENT_WEEK_URL = "https://journal.bsuir.by/api/v1/week";
 
@@ -31,7 +31,7 @@ public class JSONRequester {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        throw new JSONDataIsEmptyException("JSON data is empty");
+        throw new JSONDataIsEmptyException("Schedule.JSON data is empty");
     }
 
     public int getCurrentWeek() {
@@ -48,6 +48,6 @@ public class JSONRequester {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        throw new JSONDataIsEmptyException("JSON data is empty");
+        throw new JSONDataIsEmptyException("Schedule.JSON data is empty");
     }
 }
