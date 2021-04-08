@@ -1,7 +1,7 @@
 package Schedule;
 
-import Schedule.Exceptions.WeekDayDoesNotExistsException;
 import Schedule.Exceptions.WeekNumberDoesNotExistsException;
+import Schedule.ScheduleTools.Exceptions.WeekDayDoesNotExistsException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;

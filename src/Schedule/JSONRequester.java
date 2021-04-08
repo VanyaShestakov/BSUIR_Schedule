@@ -1,6 +1,7 @@
 package Schedule;
 
-import Schedule.JSON.Exceptions.JSONDataIsEmptyException;
+
+import Schedule.JSONTools.Exceptions.JSONDataIsEmptyException;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
